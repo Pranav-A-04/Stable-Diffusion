@@ -5,11 +5,11 @@ from utils.blocks import UpSampleBlock, MidBlock
 class Decoder(nn.Module):
     def __init__(self, im_channels, num_up_layers, num_mid_layers):
         super().__init__()
-        self.up_channels = [256, 256, 128, 64]
-        self.mid_channels = [256, 256]
+        self.up_channels = [128, 64, 32]
+        self.mid_channels = [128, 128]
         self.up_sample = [True, True, True]
         self.up_sample_attention = [False, False, False] # no attention in upsample blocks
-        self.num_heads = 4
+        self.num_heads = 16
         self.latent_dim = 3
         self.norm_channels = 32
         

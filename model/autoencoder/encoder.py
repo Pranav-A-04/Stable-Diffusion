@@ -5,11 +5,11 @@ from utils.blocks import DownSampleBlock, MidBlock
 class Encoder(nn.Module):
     def __init__(self, im_channels, num_down_layers, num_mid_layers):
         super().__init__()
-        self.down_channels = [64, 128, 256, 256]
-        self.mid_channels = [256, 256]
+        self.down_channels = [32, 64, 128]
+        self.mid_channels = [128, 128]
         self.down_sample = [True, True, True]
         self.down_sample_attention = [False, False, False] # no attention in downsample blocks
-        self.num_heads = 4
+        self.num_heads = 16
         self.latent_dim = 3
         self.norm_channels = 32
         
@@ -46,7 +46,7 @@ class Encoder(nn.Module):
             )
         
         # codebook - for VQ-VAE
-        self.codebook_size = 8192
+        self.codebook_size = 20
         self.encoder_norm_out = nn.GroupNorm(self.norm_channels, self.down_channels[-1])
         self.encoder_conv_out = nn.Conv2d(self.down_channels[-1], self.latent_dim, kernel_size=3, padding=1)
         
